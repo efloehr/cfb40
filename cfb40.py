@@ -2,9 +2,9 @@ import itertools
 
 
 def print_selection(data, teams):
-    for team in teams:
+    for team in sorted(teams):
         team_data = data.ix[team]
-        print("{0:<16} [{3:>2d}-{4:>2d}] {1:>2d} -> {2:>2.1f}".format(
+        print("{0:<16} [{3:>2d}-{4:>2d}] {1:>2d} -> {2:>4.1f}".format(
             team_data['team'], team_data['ovr_win'], team_data['projected_wins'],
             team_data['wins'], team_data['losses']))
 
@@ -13,7 +13,7 @@ def print_selection(data, teams):
     current_wins = sum([data.ix[team]['wins'] for team in teams])
     current_losses = sum([data.ix[team]['losses'] for team in teams])
 
-    print("{0:<16} [{3:>2d}-{4:>2d}] {1:>2d} -> {2:>2.1f}".format(
+    print("{0:<16} [{3:>2d}-{4:>2d}] {1:>2d} -> {2:>4.1f}".format(
         "TOTAL:", wins, proj_wins, current_wins, current_losses))
 
 

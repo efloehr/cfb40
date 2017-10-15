@@ -25,9 +25,9 @@ cfb_data = make_cfb40_data(data)
 
 def print_win_diff(team_diffs, current_data, previous_data):
     for team, diff in team_diffs:
-        print("{0:<16} [{1:>2d}-{2:>2d}] {3:>2.1f} -> {4:>2.1f}".format(
+        print("{0:<16} [{1:>2d}-{2:>2d}] {3:>4.1f} -> {4:>4.1f} (net {5:+4.1f})".format(
             team, current_data.ix[team]['wins'], current_data.ix[team]['losses'],
-            previous_data.ix[team]['projected_wins'], current_data.ix[team]['projected_wins']))
+            previous_data.ix[team]['projected_wins'], current_data.ix[team]['projected_wins'], diff))
 
 
 if week > 0:
@@ -35,12 +35,12 @@ if week > 0:
     proj_diff = {team: cfb_data.ix[team]['projected_wins'] - last_week_data.ix[team]['projected_wins'] for team in cfb_data.index}
     sorted_diff = [(team, proj_diff[team]) for team in sorted(proj_diff, key=proj_diff.get)]
     print("Top 10 decreases in win projections (last week):")
-    print("------------------------------------------------")
+    print("-------------------------------------------------")
     print_win_diff(sorted_diff[:10], cfb_data, last_week_data)
     print("")
     print("Top 10 increases in win projections (last week):")
-    print("------------------------------------------------")
-    print_win_diff(sorted_diff[-10:], cfb_data, last_week_data)
+    print("-------------------------------------------------")
+    print_win_diff(reversed(sorted_diff[-10:]), cfb_data, last_week_data)
     print("")
 
     preseason_data = get_cfb_data(2017, 0)
@@ -52,7 +52,7 @@ if week > 0:
     print("")
     print("Top 10 increases in win projections (this season):")
     print("--------------------------------------------------")
-    print_win_diff(sorted_diff[-10:], cfb_data, preseason_data)
+    print_win_diff(reversed(sorted_diff[-10:]), cfb_data, preseason_data)
     print("")
 
 best_cfb_max, best_cfb_min = calculate_best_cfb40max_and_min_teams(cfb_data, 5)
