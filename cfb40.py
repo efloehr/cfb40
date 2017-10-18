@@ -1,20 +1,29 @@
 import itertools
 
 
-def print_selection(data, teams):
+def print_selection(data, last_week_data, preseason_data, teams):
+    if last_week_data is None:
+        last_week_data = preseason_data
     for team in sorted(teams):
         team_data = data.ix[team]
-        print("{0:<16} [{3:>2d}-{4:>2d}] {1:>2d} -> {2:>4.1f}".format(
-            team_data['team'], team_data['ovr_win'], team_data['projected_wins'],
-            team_data['wins'], team_data['losses']))
+        proj_this_week = data.ix[team]['projected_wins']
+        proj_last_week = last_week_data.ix[team]['projected_wins']
+        proj_preseason = preseason_data.ix[team]['projected_wins']
+        print("{0:<16} [{2:>2d}-{3:>2d}] {1:>2d} -> {4:>4.1f} / {5:>4.1f} (net {6:>+3.1f}) / {7:>4.1f} (net {8:>+5.1f})".format(
+            team_data['team'], team_data['ovr_win'], team_data['wins'], team_data['losses'],
+            proj_this_week, proj_last_week, proj_this_week - proj_last_week, proj_preseason, proj_this_week - proj_preseason))
 
     wins = sum([data.ix[team]['ovr_win'] for team in teams])
-    proj_wins = sum([data.ix[team]['projected_wins'] for team in teams])
+    proj_wins_this_week = sum([data.ix[team]['projected_wins'] for team in teams])
+    proj_wins_last_week = sum([last_week_data.ix[team]['projected_wins'] for team in teams])
+    proj_wins_preseason = sum([preseason_data.ix[team]['projected_wins'] for team in teams])
     current_wins = sum([data.ix[team]['wins'] for team in teams])
     current_losses = sum([data.ix[team]['losses'] for team in teams])
 
-    print("{0:<16} [{3:>2d}-{4:>2d}] {1:>2d} -> {2:>4.1f}".format(
-        "TOTAL:", wins, proj_wins, current_wins, current_losses))
+    print("{0:<16} [{2:>2d}-{3:>2d}] {1:>2d} -> {4:>4.1f} / {5:>4.1f} (net {6:>+3.1f}) / {7:>4.1f} (net {8:>+5.1f})".format(
+        "TOTAL:", wins, current_wins, current_losses,
+        proj_wins_this_week, proj_wins_last_week, proj_wins_this_week - proj_wins_last_week,
+        proj_wins_preseason, proj_wins_this_week - proj_wins_preseason))
 
 
 # Get power 5 win loss last year
