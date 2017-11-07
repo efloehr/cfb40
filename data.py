@@ -70,6 +70,9 @@ def get_espn_standings_data(year):
     team_data = []
     for conf_index, conf in enumerate(teams_by_conference):
         team_names = [name.text for name in conf.xpath('.//tr//span[@class="team-names"]')]
+        # Fix for data issue on ESPN site
+        if conf_index == 7:
+            team_names = team_names[:8] + ["San Jose State"] + team_names[8:]
         team_names = [team if team not in ESPN_STANDINGS_TEAM_CONVERSION.keys()
                         else ESPN_STANDINGS_TEAM_CONVERSION[team] for team in team_names]
         raw_team_data = [data[1:] for data in conf.xpath('.//tr')[1:]]
@@ -110,6 +113,9 @@ ESPN_PI = {2017:
                     '20171002040000',
                     '20171009040000',
                     '20171016040000',
+                    '20171023040000',
+                    '20171030040000',
+                    '20171106040000'
                 ],
 }
 
