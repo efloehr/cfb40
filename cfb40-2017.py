@@ -65,27 +65,27 @@ print("--------------")
 print("")
 for name, teams in CFB40_MAX.items():
     print("{0}'s Entries:".format(name))
-    print("------------------------------------------------------------------------")
+    print("----------------------------------------------------------------------------")
     print_selection(cfb_data, last_week_data, preseason_data, teams)
     print("")
 
 print("Best Projected Entry:")
-print("------------------------------------------------------------------------")
+print("----------------------------------------------------------------------------")
 print_selection(cfb_data, last_week_data, preseason_data, best_cfb_max)
 print("")
 
 print("")
 print("Min Standings:")
-print("------------------------------------------------------------------------")
+print("--------------")
 print("")
 for name, teams in CFB40_MIN.items():
     print("{0}'s Entries:".format(name))
-    print("------------------------------------------------------------------------")
+    print("----------------------------------------------------------------------------")
     print_selection(cfb_data, last_week_data, preseason_data, teams)
     print("")
 
 print("Best Projected Entry:")
-print("------------------------------------------------------------------------")
+print("----------------------------------------------------------------------------")
 print_selection(cfb_data, last_week_data, preseason_data, best_cfb_min)
 print("")
 
