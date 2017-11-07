@@ -9,9 +9,17 @@ def print_selection(data, last_week_data, preseason_data, teams):
         proj_this_week = data.ix[team]['projected_wins']
         proj_last_week = last_week_data.ix[team]['projected_wins']
         proj_preseason = preseason_data.ix[team]['projected_wins']
-        print("{0:<16} [{2:>2d}-{3:>2d}] {1:>2d} -> {4:>4.1f} / {5:>4.1f} (net {6:>+3.1f}) / {7:>4.1f} (net {8:>+5.1f})".format(
+        games_last_week = last_week_data.ix[team]['wins'] + last_week_data.ix[team]['losses']
+        games_this_week = data.ix[team]['wins'] + data.ix[team]['losses']
+        new_wins = data.ix[team]['wins'] - last_week_data.ix[team]['wins']
+        if games_this_week == games_last_week:
+            new_wins = '-'
+        else:
+            new_wins = str(new_wins)
+        print("{0:<16} [{9:1s}] [{2:>2d}-{3:>2d}] {1:>2d} -> {4:>4.1f} / {5:>4.1f} (net {6:>+3.1f}) / {7:>4.1f} (net {8:>+5.1f})".format(
             team_data['team'], team_data['ovr_win'], team_data['wins'], team_data['losses'],
-            proj_this_week, proj_last_week, proj_this_week - proj_last_week, proj_preseason, proj_this_week - proj_preseason))
+            proj_this_week, proj_last_week, proj_this_week - proj_last_week, proj_preseason, proj_this_week - proj_preseason,
+            new_wins))
 
     wins = sum([data.ix[team]['ovr_win'] for team in teams])
     proj_wins_this_week = sum([data.ix[team]['projected_wins'] for team in teams])
@@ -20,7 +28,7 @@ def print_selection(data, last_week_data, preseason_data, teams):
     current_wins = sum([data.ix[team]['wins'] for team in teams])
     current_losses = sum([data.ix[team]['losses'] for team in teams])
 
-    print("{0:<16} [{2:>2d}-{3:>2d}] {1:>2d} -> {4:>4.1f} / {5:>4.1f} (net {6:>+3.1f}) / {7:>4.1f} (net {8:>+5.1f})".format(
+    print("{0:<16}     [{2:>2d}-{3:>2d}] {1:>2d} -> {4:>4.1f} / {5:>4.1f} (net {6:>+3.1f}) / {7:>4.1f} (net {8:>+5.1f})".format(
         "TOTAL:", wins, current_wins, current_losses,
         proj_wins_this_week, proj_wins_last_week, proj_wins_this_week - proj_wins_last_week,
         proj_wins_preseason, proj_wins_this_week - proj_wins_preseason))
