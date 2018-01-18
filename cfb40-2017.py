@@ -1,21 +1,22 @@
 from data import get_cfb_data
 from cfb40 import print_selection, make_cfb40_data, calculate_best_cfb40max_and_min_teams
+from collections import OrderedDict
 import itertools
 import sys
 
-CFB40_MAX = {
-    'Grimm': ['OSU','FSU','USC','Texas','Oregon'],
-    'Eric': ['OSU','Oklahoma','Auburn','TCU','Oregon'],
-    'Nick': ['OSU','FSU','USC','Texas','Oregon'],
-    'Ethan': ['Oklahoma','FSU','USC','Texas','Notre Dame'],
-}
+CFB40_MAX = OrderedDict([
+    ('Grimm', ['OSU','FSU','USC','Texas','Oregon']),
+    ('Eric', ['OSU','Oklahoma','Auburn','TCU','Oregon']),
+    ('Nick', ['OSU','FSU','USC','Texas','Oregon']),
+    ('Ethan', ['Oklahoma','FSU','USC','Texas','Notre Dame']),
+])
 
-CFB40_MIN = {
-    'Grimm': ['Colorado','Michigan','Texas A&M','UVA','West Virginia'],
-    'Eric': ['Boston College','Cal','Minnesota','Utah','West Virginia'],
-    'Nick': ['Clemson','Colorado','Illinois','Purdue','West Virginia'],
-    'Ethan': ['BYU','Colorado','Minnesota','Missouri','UNC'],
-}
+CFB40_MIN = OrderedDict([
+    ('Grimm', ['Colorado','Michigan','Texas A&M','UVA','West Virginia']),
+    ('Eric', ['Boston College','Cal','Minnesota','Utah','West Virginia']),
+    ('Nick', ['Clemson','Colorado','Illinois','Purdue','West Virginia']),
+    ('Ethan', ['BYU','Colorado','Minnesota','Missouri','UNC']),
+])
 
 
 week = int(sys.argv[1])
