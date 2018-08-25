@@ -55,9 +55,9 @@ def get_espn_standings_data(year):
 
     htmldoc = lxml.html.document_fromstring(html.text)
 
-    conferences = htmldoc.find_class('long-caption')
+    conferences = htmldoc.find_class('Table2__Title')
 
-    teams_by_conference = htmldoc.xpath('//table')
+    teams_by_conference = htmldoc.find_class('Table2__table__wrapper')
 
     if len(conferences) != len(teams_by_conference):
         print("Teams and conference number not equal! {0} vs {1}".format(len(conferences), len(teams_by_conference)))
@@ -69,17 +69,20 @@ def get_espn_standings_data(year):
 
     team_data = []
     for conf_index, conf in enumerate(teams_by_conference):
-        team_names = [name.text for name in conf.xpath('.//tr//span[@class="team-names"]')]
-        # Fix for data issue on ESPN site
-        if conf_index == 7:
-            team_names = team_names[:8] + ["San Jose State"] + team_names[8:]
+        team_names = [name.text_content() for name in conf.xpath('.//span[@class="hide-mobile"]')]
+
         team_names = [team if team not in ESPN_STANDINGS_TEAM_CONVERSION.keys()
                         else ESPN_STANDINGS_TEAM_CONVERSION[team] for team in team_names]
-        raw_team_data = [data[1:] for data in conf.xpath('.//tr')[1:]]
-        for team_index, data in enumerate([data for data in raw_team_data if len(data) != 3]):
+
+        raw_team_data = conf.xpath('.//tbody[@class="Table2__tbody"]')[1].xpath('.//tr')
+
+        # Remove headers
+        raw_team_data = [data for data in raw_team_data if data[0].text_content() != 'W-L']
+
+        for team_index, data in enumerate(raw_team_data):
             ovr_win, ovr_loss = __get_espn_win_loss(data[3])
-            pf = data[4].text
-            pa = data[5].text
+            pf = data[4].text_content()
+            pa = data[5].text_content()
             home_win, home_loss = __get_espn_win_loss(data[6])
             away_win, away_loss = __get_espn_win_loss(data[7])
             ap_win, ap_loss = __get_espn_win_loss(data[9])
@@ -95,7 +98,7 @@ def get_espn_standings_data(year):
 
 
 def __get_espn_win_loss(win_loss_element):
-    win_loss_text = win_loss_element.text
+    win_loss_text = win_loss_element.text_content()
     wins = losses = 0
     if win_loss_text != '--':
         wins, losses = win_loss_text.split('-')
@@ -103,26 +106,31 @@ def __get_espn_win_loss(win_loss_element):
 
 
 ESPN_PI_URL = "http://www.espn.com/college-football/statistics/teamratings/_/year/{year}/key/{week}"
-ESPN_PI = {2017:
-                [
-                    '20170826040000',
-                    '20170904040000',
-                    '20170911040000',
-                    '20170918040000',
-                    '20170925040000',
-                    '20171002040000',
-                    '20171009040000',
-                    '20171016040000',
-                    '20171023040000',
-                    '20171030040000',
-                    '20171106040000',
-                    '20171113040000',
-                    '20171120040000',
-                    '20171127040000',
-                    '20171204040000',
-                    '20171211040000',
-                    '20180109040000',
-                ],
+ESPN_PI = {
+    2017:
+        [
+            '20170826040000',
+            '20170904040000',
+            '20170911040000',
+            '20170918040000',
+            '20170925040000',
+            '20171002040000',
+            '20171009040000',
+            '20171016040000',
+            '20171023040000',
+            '20171030040000',
+            '20171106040000',
+            '20171113040000',
+            '20171120040000',
+            '20171127040000',
+            '20171204040000',
+            '20171211040000',
+            '20180109040000',
+        ],
+    2018:
+        [
+            '',
+        ]
 }
 
 
