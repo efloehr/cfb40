@@ -4,7 +4,7 @@ import itertools
 def print_selection(data, last_week_data, preseason_data, teams):
     if last_week_data is None:
         last_week_data = preseason_data
-    for team in sorted(teams):
+    for team in sorted(teams, key=lambda s: s.lower()):
         team_data = data.ix[team]
         proj_this_week = data.ix[team]['projected_wins']
         proj_last_week = last_week_data.ix[team]['projected_wins']
