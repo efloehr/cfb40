@@ -71,13 +71,6 @@ for name, teams in CFB64_MAX.items():
     print_selection(cfb_data, last_week_data, preseason_data, teams)
     print("")
 
-best_cfb_max, best_cfb_min = calculate_best_cfbNmax_and_min_teams(cfb_data, 8)
-
-print("Best Projected Entry:")
-print("----------------------------------------------------------------------------")
-#print_selection(cfb_data, last_week_data, preseason_data, best_cfb_max)
-print("")
-
 print("")
 print("Min Standings:")
 print("--------------")
@@ -88,7 +81,14 @@ for name, teams in CFB64_MIN.items():
     print_selection(cfb_data, last_week_data, preseason_data, teams)
     print("")
 
-print("Best Projected Entry:")
+best_cfb_max, best_cfb_min = calculate_best_cfbNmax_and_min_teams(cfb_data, 8)
+
+print("Best Projected Max Entry:")
 print("----------------------------------------------------------------------------")
-#print_selection(cfb_data, last_week_data, preseason_data, best_cfb_min)
+print_selection(cfb_data, last_week_data, preseason_data, best_cfb_max)
+print("")
+
+print("Best Projected Min Entry:")
+print("----------------------------------------------------------------------------")
+print_selection(cfb_data, last_week_data, preseason_data, best_cfb_min)
 print("")
