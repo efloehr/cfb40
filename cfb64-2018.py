@@ -5,27 +5,30 @@ import itertools
 import sys
 
 CFB40_MAX = OrderedDict([
-    ('Grimm', ['OSU','FSU','USC','Texas','Oregon']),
-    ('Eric', ['OSU','Oklahoma','Auburn','TCU','Oregon']),
-    ('Nick', ['OSU','FSU','USC','Texas','Oregon']),
-    ('Ethan', ['Oklahoma','FSU','USC','Texas','Notre Dame']),
+
+    ('Grimm', ['Alabama','Clemson','FSU','Georgia','Kansas','OSU','Oregon St','Pitt']),
+    ('Eric', ['Auburn','Baylor','Clemson','Florida','Mich. St.','Notre Dame','Texas','Washington']),
+    ('Nick', ['Baylor','Clemson','Florida','FSU','Miami','Notre Dame','OSU','Texas']),
+    ('Ethan', ['Florida','FSU','Nebraska','OSU','PSU','Stanford','TCU','UCLA']),
+    ('CompuNick', ['Alabama','Baylor','Cal','Clemson','Florida','OSU','Texas','Washington']),
 ])
 
 CFB40_MIN = OrderedDict([
-    ('Grimm', ['Colorado','Michigan','Texas A&M','UVA','West Virginia']),
-    ('Eric', ['Boston College','Cal','Minnesota','Utah','West Virginia']),
-    ('Nick', ['Clemson','Colorado','Illinois','Purdue','West Virginia']),
-    ('Ethan', ['BYU','Colorado','Minnesota','Missouri','UNC']),
+    ('Grimm', ['Illinois','Indiana','Louisville','Maryland','Northwestern','Notre Dame','Oklahoma','Wisconsin']),
+    ('Eric', ['Arizona State','Colorado','Kentucky','LSU','Northwestern','TCU','UVA','Washington St']),
+    ('Nick', ['Kansas','LSU','Northwestern','Oregon St','S Carolina','TCU','USC','Wisconsin']),
+    ('Ethan', ['Colorado','Miss St','NC State','Oklahoma State','Purdue','S Carolina','Texas Tech','Washington St']),
+    ('CompuNick', ['Arizona State','Kansas','LSU','Northwestern','Ole Miss','S Carolina','UVA','Washington St']),
 ])
 
 
 week = int(sys.argv[1])
-data = get_cfb_data(2017, week)
+data = get_cfb_data(2018, week)
 if week > 0:
-    last_week_data = get_cfb_data(2017, week-1)
+    last_week_data = get_cfb_data(2018, week-1)
 else:
     last_week_data = None
-preseason_data = get_cfb_data(2017, 0)
+preseason_data = get_cfb_data(2018, 0)
 cfb_data = make_cfb_data(data)
 
 
@@ -59,7 +62,7 @@ if week > 0:
     print_win_diff(reversed(sorted_diff[-10:]), cfb_data, preseason_data)
     print("")
 
-best_cfb_max, best_cfb_min = calculate_best_cfbNmax_and_min_teams(cfb_data, 5)
+#best_cfb_max, best_cfb_min = calculate_best_cfbNmax_and_min_teams(cfb_data, 8)
 
 print("Max Standings:")
 print("--------------")
@@ -72,7 +75,7 @@ for name, teams in CFB40_MAX.items():
 
 print("Best Projected Entry:")
 print("----------------------------------------------------------------------------")
-print_selection(cfb_data, last_week_data, preseason_data, best_cfb_max)
+#print_selection(cfb_data, last_week_data, preseason_data, best_cfb_max)
 print("")
 
 print("")
@@ -87,15 +90,5 @@ for name, teams in CFB40_MIN.items():
 
 print("Best Projected Entry:")
 print("----------------------------------------------------------------------------")
-print_selection(cfb_data, last_week_data, preseason_data, best_cfb_min)
+#print_selection(cfb_data, last_week_data, preseason_data, best_cfb_min)
 print("")
-
-    # cfb40max_best, cfb40min_best = calculate_best_cfb40max_and_min_teams(data, 5)
-#
-# print()
-# print("My CFB40 Max selection:")
-# print_selection(data, cfb40max_best)
-#
-# print()
-# print("My CFB40 Min selection:")
-# print_selection(data, cfb40min_best)

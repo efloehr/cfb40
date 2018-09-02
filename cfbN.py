@@ -39,36 +39,36 @@ def make_power5_data(data):
     return data[data.conference.isin(['Atlantic Coast Conference','Big Ten Conference', 'Big 12 Conference', 'FBS Independents', 'Pac-12 Conference', 'Southeastern Conference'])]
 
 
-def make_cfb40_data(data):
+def make_cfb_data(data):
     power5_data = make_power5_data(data)
-    return power5_data[~power5_data.team.isin(['Army','UMass'])]
+    return power5_data[~power5_data.team.isin(['Army','UMass','BYU'])]
 
 
-def calculate_best_cfb40max_and_min_teams(data, num_teams):
-    cfb40frame = make_cfb40_data(data)
-    cfb40dict = cfb40frame.to_dict(orient='index')
+def calculate_best_cfbNmax_and_min_teams(data, num_teams):
+    cfbframe = make_cfb_data(data)
+    cfbdict = cfbframe.to_dict(orient='index')
 
     # Get all combinations of n teams
-    all_n_teams = itertools.combinations(cfb40dict.keys(), num_teams)
+    all_n_teams = itertools.combinations(cfbdict.keys(), num_teams)
 
-    # Get all combinations of 5 teams with 8n wins or less
-    cfb40max_selection = None
-    cfb40max_predicted_wins = 0
-    cfb40min_selection = None
-    cfb40min_predicted_wins = 999999
+    # Get all combinations of num_teams teams with 8n wins or less
+    cfbmax_selection = None
+    cfbmax_predicted_wins = 0
+    cfbmin_selection = None
+    cfbmin_predicted_wins = 999999
 
     n8wins = num_teams * 8
 
     for n_team in all_n_teams:
-        wins = sum([cfb40dict[team]['ovr_win'] for team in n_team])
-        proj_wins = sum([cfb40dict[team]['projected_wins'] for team in n_team])
+        wins = sum([cfbdict[team]['ovr_win'] for team in n_team])
+        proj_wins = sum([cfbdict[team]['projected_wins'] for team in n_team])
         if wins <= n8wins:
-            if proj_wins > cfb40max_predicted_wins:
-                cfb40max_selection = n_team
-                cfb40max_predicted_wins = proj_wins
+            if proj_wins > cfbmax_predicted_wins:
+                cfbmax_selection = n_team
+                cfbmax_predicted_wins = proj_wins
         if wins >= n8wins:
-            if proj_wins < cfb40min_predicted_wins:
-                cfb40min_selection = n_team
-                cfb40min_predicted_wins = proj_wins
+            if proj_wins < cfbmin_predicted_wins:
+                cfbmin_selection = n_team
+                cfbmin_predicted_wins = proj_wins
 
-    return cfb40max_selection, cfb40min_selection
+    return cfbmax_selection, cfbmin_selection
