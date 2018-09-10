@@ -19,7 +19,7 @@ ESPN_STANDINGS_TEAM_CONVERSION = \
         "Air Force Falcons": "Air Force",
         "Akron Zips": "Akron",
         "Alabama Crimson Tide": "Alabama",
-        "Appalachian State Mountaineers": "Appalachian St",
+        "Appalachian State Mountaineers": "App St",
         "Arizona State Sun Devils": "Arizona State",
         "Arizona Wildcats": "Arizona",
         "Arkansas Razorbacks": "Arkansas",
@@ -93,7 +93,7 @@ ESPN_STANDINGS_TEAM_CONVERSION = \
         "Northwestern Wildcats": "Northwestern",
         "Notre Dame Fighting Irish": "Notre Dame",
         "Ohio Bobcats": "Ohio",
-        "Ohio State Buckeyes": "OSU",
+        "Ohio State Buckeyes": "Ohio St",
         "Oklahoma Sooners": "Oklahoma",
         "Oklahoma State Cowboys": "Oklahoma State",
         "Old Dominion Monarchs": "Old Dominion",
@@ -142,7 +142,7 @@ ESPN_STANDINGS_TEAM_CONVERSION = \
         "Wake Forest Demon Deacons": "Wake Forest",
         "Washington Huskies": "Washington",
         "Washington State Cougars": "Washington St",
-        "West Virginia Mountaineers": "West Virginia",
+        "West Virginia Mountaineers": "WVU",
         "Western Kentucky Hilltoppers": "W Kentucky",
         "Western Michigan Broncos": "W Michigan",
         "Wisconsin Badgers": "Wisconsin",
@@ -231,7 +231,7 @@ ESPN_PI = {
     2018:
         [
             '20180825040000',
-            '20180902040000',
+            '20180903040000',
         ]
 }
 
