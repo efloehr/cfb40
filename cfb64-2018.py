@@ -6,11 +6,11 @@ import sys
 
 CFB64_MAX = OrderedDict([
 
-    ('Grimm', ['Alabama','Clemson','FSU','Georgia','Kansas','Ohio St','Oregon St','Pitt']),
+    ('Grimm', ['Alabama','Clemson','FSU','Georgia','Kansas','Ohio State','Oregon St','Pitt']),
     ('Eric', ['Auburn','Baylor','Clemson','Florida','Mich. St.','Notre Dame','Texas','Washington']),
-    ('Nick', ['Baylor','Clemson','Florida','FSU','Miami','Notre Dame','Ohio St','Texas']),
-    ('Ethan', ['Florida','FSU','Nebraska','Ohio St','PSU','Stanford','TCU','UCLA']),
-    ('CompuNick', ['Alabama','Baylor','Cal','Clemson','Florida','Ohio St','Texas','Washington']),
+    ('Nick', ['Baylor','Clemson','Florida','FSU','Miami','Notre Dame','Ohio State','Texas']),
+    ('Ethan', ['Florida','FSU','Nebraska','Ohio State','Penn State','Stanford','TCU','UCLA']),
+    ('CompuNick', ['Alabama','Baylor','Cal','Clemson','Florida','Ohio State','Texas','Washington']),
     ('CompuEric', ['Baylor','Clemson','Florida','Georgia','Notre Dame','Oregon','Texas','Washington']),
 ])
 
