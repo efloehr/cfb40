@@ -13,7 +13,7 @@ all_n_teams = itertools.combinations(cfb40dict.keys(), num_teams)
 
 # Get all combinations of 5 teams with 8n wins or less
 cfb40max_selection = None
-cfb40max_predicted_wins = 74  # 76
+cfb40max_predicted_wins = 75  # 76
 cfb40min_selection = None
 cfb40min_predicted_wins = 45  # 43
 
@@ -28,9 +28,11 @@ for n_team in all_n_teams:
             print_selection(data, data, data, n_team)
             print("##################")
             print("")
+            #cfb40max_predicted_wins = proj_wins
     if wins >= n8wins:
         if proj_wins < cfb40min_predicted_wins:
             print("----- min {} -----".format(proj_wins))
             print_selection(data, data, data, n_team)
             print("------------------")
             print("")
+            #cfb40min_predicted_wins = proj_wins
