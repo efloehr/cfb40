@@ -3,7 +3,7 @@ from cfbN import calculate_best_cfbNmax_and_min_teams, print_selection, make_cfb
 import pandas as pd
 import itertools
 
-year = 2018
+year = 2019
 week = 0
 num_teams = 8
 
@@ -24,5 +24,8 @@ teams = sorted(combined['team'])
 for team in teams:
     team_data = combined.loc[team]
     print(
-    "{0:<16} {1:>2d} -> {2:>4.1f}".format(
-        team_data['team'], team_data['ovr_win'], team_data['projected_wins']))
+    "{0:<16},{1:>2d},{2:>4.1f},{3:>4.1f}".format(
+        team_data['team'],
+        team_data['ovr_win'],
+        team_data['projected_wins'],
+        team_data['projected_wins'] - team_data['ovr_win']))
