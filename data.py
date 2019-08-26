@@ -42,12 +42,12 @@ ESPN_STANDINGS_TEAM_CONVERSION = \
         "Colorado Buffaloes": "Colorado",
         "Colorado State Rams": "Colorado State",
         "Duke Blue Devils": "Duke",
-        "East Carolina Pirates": "ECU",
+        "East Carolina Pirates": "East Carolina",
         "Eastern Michigan Eagles": "E Michigan",
         "Florida Atlantic Owls": "FAU",
         "Florida Gators": "Florida",
-        "Florida Intl Golden Panthers": "FIU",
-        "Florida State Seminoles": "FSU",
+        "Florida International Panthers": "Florida Intl",
+        "Florida State Seminoles": "Florida State",
         "Fresno State Bulldogs": "Fresno State",
         "Georgia Bulldogs": "Georgia",
         "Georgia Southern Eagles": "Ga Southern",
@@ -66,7 +66,7 @@ ESPN_STANDINGS_TEAM_CONVERSION = \
         "Kent State Golden Flashes": "Kent State",
         "Kentucky Wildcats": "Kentucky",
         "LSU Tigers": "LSU",
-        "Louisiana Monroe Warhawks": "UL Monroe",
+        "UL Monroe Warhawks": "UL Monroe",
         "Louisiana Ragin' Cajuns": "Louisiana",
         "Louisiana Tech Bulldogs": "LA Tech",
         "Louisville Cardinals": "Louisville",
@@ -87,7 +87,7 @@ ESPN_STANDINGS_TEAM_CONVERSION = \
         "Nevada Wolf Pack": "Nevada",
         "New Mexico Lobos": "New Mexico",
         "New Mexico State Aggies": "New Mexico St",
-        "North Carolina Tar Heels": "UNC",
+        "North Carolina Tar Heels": "North Carolina",
         "North Texas Mean Green": "North Texas",
         "Northern Illinois Huskies": "N Illinois",
         "Northwestern Wildcats": "Northwestern",
@@ -132,13 +132,13 @@ ESPN_STANDINGS_TEAM_CONVERSION = \
         "UMass Minutemen": "UMass",
         "UNLV Rebels": "UNLV",
         "USC Trojans": "USC",
-        "UT San Antonio Roadrunners": "UTSA",
+        "UTSA Roadrunners": "UTSA",
         "UTEP Miners": "UTEP",
         "Utah State Aggies": "Utah State",
         "Utah Utes": "Utah",
         "Vanderbilt Commodores": "Vanderbilt",
-        "Virginia Cavaliers": "UVA",
-        "Virginia Tech Hokies": "VT",
+        "Virginia Cavaliers": "Virginia",
+        "Virginia Tech Hokies": "Virginia Tech",
         "Wake Forest Demon Deacons": "Wake Forest",
         "Washington Huskies": "Washington",
         "Washington State Cougars": "Washington St",
@@ -246,7 +246,11 @@ ESPN_PI = {
             '20181125040000',
             '20181203040000',
             '20190108040000',
-        ]
+        ],
+    2019:
+        [
+            '20190824040000',
+        ],
 }
 
 
@@ -258,6 +262,10 @@ def get_espn_power_index_data(year, week_number):
 
     # Drop header rows
     table = table.drop(table.index[[0, 1]])
+
+    # Drop two odd columns
+    table = table.drop(table.columns[9], axis=1)
+    table = table.drop(table.columns[8], axis=1)
 
     # Create true header names
     table.columns = ['rank', 'team_conf', 'win_loss', 'projected_win_loss', 'win_out_pct', 'conf_win_pct',
